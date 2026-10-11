@@ -28,10 +28,7 @@
 >
   <source src="wp.mp4" type="video/mp4" />
 </video>
-
-<!-- Overlay gelap biar konten kebaca -->
 <div class="bg-overlay" aria-hidden="true"></div>
-<!-- Grain/noise subtle -->
 <div class="bg-noise" aria-hidden="true"></div>
 
 <!-- ============================================================
@@ -280,93 +277,80 @@
   </div>
 </div>
 
-<div class="toast-wrap" id="toastWrap"></div>
+<!-- ============================================================
+     BOTTOM NAV — TOOLBAR
+     ============================================================ -->
+<nav class="nav">
+  <div class="nav-inner">
+
+    <!-- HOME -->
+    <a href="index.html" class="nav-btn active" data-page="home">
+      <span class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 10.5 12 3l9 7.5"/>
+          <path d="M5 9.5V21h14V9.5"/>
+          <path d="M9 21v-6h6v6"/>
+        </svg>
+      </span>
+      <span class="lbl">Home</span>
+    </a>
+
+    <!-- TASK -->
+    <a href="task.html" class="nav-btn" data-page="task">
+      <span class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 11l3 3L22 4"/>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+        </svg>
+      </span>
+      <span class="lbl">Task</span>
+      <span class="dot" id="taskDot">0</span>
+    </a>
+
+    <!-- RIWAYAT -->
+    <a href="riwayat.html" class="nav-btn" data-page="riwayat">
+      <span class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 1 0 3-6.7"/>
+          <polyline points="3 4 3 9 8 9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+      </span>
+      <span class="lbl">Riwayat</span>
+      <span class="dot" id="histDot">0</span>
+    </a>
+
+    <!-- WITHDRAW -->
+    <a href="wd.html" class="nav-btn" data-page="wd">
+      <span class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="6" width="20" height="13" rx="2.5"/>
+          <path d="M2 10h20"/>
+          <path d="M6 15h4"/>
+        </svg>
+      </span>
+      <span class="lbl">Withdraw</span>
+    </a>
+
+    <!-- AKUN (COMING SOON) -->
+    <a href="akun.html" class="nav-btn soon" data-page="akun">
+      <span class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </span>
+      <span class="lbl">Akun</span>
+    </a>
+
+  </div>
+</nav>
 
 <!-- ============================================================
-     SCRIPT: VIDEO WALLPAPER CONTROLLER
+     TOAST + SCRIPT
      ============================================================ -->
-<script>
-(function(){
-  'use strict';
-
-  var video = document.getElementById('bgVideo');
-  if (!video) return;
-
-  /* --------------------------------------------------------
-     01. Autoplay guard — beberapa browser mobile
-         (iOS low-power, Chrome data saver) blokir autoplay
-         walau muted. Kita coba play() manual dan retry
-         pada interaksi pertama user.
-     -------------------------------------------------------- */
-  function tryPlay() {
-    var p = video.play();
-    if (p && typeof p.catch === 'function') {
-      p.catch(function(){
-        // Autoplay diblokir, tunggu interaksi user
-        var resume = function() {
-          video.play().catch(function(){});
-          document.removeEventListener('touchstart', resume);
-          document.removeEventListener('click', resume);
-          document.removeEventListener('scroll', resume);
-        };
-        document.addEventListener('touchstart', resume, { once: true, passive: true });
-        document.addEventListener('click', resume, { once: true });
-        document.addEventListener('scroll', resume, { once: true, passive: true });
-      });
-    }
-  }
-
-  /* --------------------------------------------------------
-     02. Pause saat tab tidak aktif biar hemat baterai
-     -------------------------------------------------------- */
-  document.addEventListener('visibilitychange', function(){
-    if (document.hidden) {
-      video.pause();
-    } else {
-      tryPlay();
-    }
-  });
-
-  /* --------------------------------------------------------
-     03. Fallback: kalau video error / tidak ketemu,
-         pakai gradient gelap (CSS sudah handle via --bg-0)
-     -------------------------------------------------------- */
-  video.addEventListener('error', function(){
-    video.style.display = 'none';
-    document.body.style.background =
-      'linear-gradient(160deg,#1A1A1F 0%,#0E0E11 100%)';
-  });
-
-  /* --------------------------------------------------------
-     04. Play pertama kali & saat terlihat di viewport
-     -------------------------------------------------------- */
-  tryPlay();
-
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (e.isIntersecting) {
-          tryPlay();
-        } else {
-          video.pause();
-        }
-      });
-    }, { threshold: 0 });
-    io.observe(video);
-  }
-
-  /* --------------------------------------------------------
-     05. Muat ulang video saat halaman balik dari bfcache
-     -------------------------------------------------------- */
-  window.addEventListener('pageshow', function(evt){
-    if (evt.persisted) {
-      video.currentTime = 0;
-      tryPlay();
-    }
-  });
-})();
-</script>
-
+<div class="toast-wrap" id="toastWrap"></div>
 <script src="app.js"></script>
+
 </body>
 </html>
