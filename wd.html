@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#202024" />
+<meta name="description" content="Dompet dan penarikan saldo — Reward Center." />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>Reward Center — Dompet</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="wd">
+
+<!-- ============================================================
+     VIDEO WALLPAPER
+     ============================================================ -->
+<video
+  class="bg-video"
+  id="bgVideo"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto"
+  disablepictureinpicture
+  poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><rect width='100%25' height='100%25' fill='%23121215'/></svg>"
+>
+  <source src="wp.mp4" type="video/mp4" />
+</video>
+<div class="bg-overlay" aria-hidden="true"></div>
+<div class="bg-noise" aria-hidden="true"></div>
+
+<!-- ============================================================
+     TOP BAR
+     ============================================================ -->
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <div class="brand-mark">RC</div>
+      <div class="brand-txt">
+        <span class="brand-name">Reward Center</span>
+        <span class="brand-sub">Dompet</span>
+      </div>
+    </div>
+    <div class="balance-pill">
+      <span class="lbl">Saldo</span>
+      <span class="val" id="topBalance">Rp 0</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main class="app">
+
+  <!-- SECTION HEAD -->
+  <div class="sec-head">
+    <div class="left">
+      <div class="eyebrow">Saldo &amp; Pencairan</div>
+      <h2>Dompet Reward</h2>
+    </div>
+  </div>
+
+  <!-- WALLET HERO -->
+  <div class="wallet-hero">
+    <div class="lbl">Saldo Tersedia</div>
+    <div class="amt" id="walletBalance">Rp 0</div>
+    <div class="sub">Minimal penarikan Rp 50.000 · Diproses 1×24 jam kerja</div>
+    <div class="actions">
+      <button class="btn btn-primary btn-sm" id="btnWithdraw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 19V5"/>
+          <path d="m5 12 7-7 7 7"/>
+        </svg>
+        Tarik Saldo
+      </button>
+      <button class="btn btn-outline btn-sm" id="btnResetData">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 6h18"/>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+        </svg>
+        Reset
+      </button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats mt-14">
+    <div class="stat">
+      <div class="k">Menunggu</div>
+      <div class="v" id="walletPending">Rp 0</div>
+      <div class="s" id="walletPendingCount">0 pengajuan</div>
+    </div>
+    <div class="stat">
+      <div class="k">Total</div>
+      <div class="v" id="walletTotal">Rp 0</div>
+      <div class="s" id="walletTotalCount">0 terverifikasi</div>
+    </div>
+  </div>
+
+  <!-- RINGKASAN AKTIVITAS -->
+  <div class="panel mt-16">
+    <div class="panel-head">
+      <h4 style="font-size:13.5px">Ringkasan Aktivitas</h4>
+      <span class="badge badge-neutral">Lokal</span>
+    </div>
+    <div class="panel-body" style="padding:6px 15px 12px">
+      <div class="kv-row">
+        <span class="k">Tugas diambil</span>
+        <span class="v" id="sumTaken">0</span>
+      </div>
+      <div class="kv-row">
+        <span class="k">Menunggu review</span>
+        <span class="v" id="sumReview">0</span>
+      </div>
+      <div class="kv-row">
+        <span class="k">Diterima</span>
+        <span class="v" id="sumDone">0</span>
+      </div>
+      <div class="kv-row">
+        <span class="k">Ditolak</span>
+        <span class="v" id="sumReject">0</span>
+      </div>
+      <div class="kv-row">
+        <span class="k">Tingkat penerimaan</span>
+        <span class="v" id="sumRate">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTE INFO -->
+  <div class="note info mt-16">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 16v-5M12 8h.01"/>
+    </svg>
+    <span>Pastikan data rekening benar. Kesalahan data yang menyebabkan transfer gagal bukan tanggung jawab pengelola program.</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="brand">
+      <div class="brand-mark">RC</div>
+      <div class="brand-txt">
+        <span class="brand-name">Reward Center</span>
+        <span class="brand-sub">Promosi TikTok</span>
+      </div>
+    </div>
+    <p>Reward yang sudah terverifikasi masuk ke saldo dan dapat dicairkan.</p>
+    <div class="foot-links">
+      <a href="index.html">Beranda</a>
+      <a href="task.html">Tugas</a>
+      <a href="riwayat.html">Riwayat</a>
+    </div>
+    <div class="foot-copy">© <span id="year"></span> Reward Center · Status: operasional</div>
+  </footer>
+
+</main>
+
+<!-- ============================================================
+     SHEET: WITHDRAW
+     ============================================================ -->
+<div class="overlay" id="sheetWithdraw">
+  <div class="sheet">
+    <div class="sheet-handle"><span></span></div>
+    <div class="sheet-head">
+      <div style="min-width:0">
+        <h3>Ajukan Penarikan</h3>
+        <div class="sub">Min Rp 50.000 · Proses 1×24 jam</div>
+      </div>
+      <button class="sheet-close" data-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="sheet-body">
+
+      <div class="kv-row mb-14" style="padding-top:0">
+        <span class="k">Saldo tersedia</span>
+        <span class="v" id="wBalance">Rp 0</span>
+      </div>
+
+      <form id="formWithdraw" novalidate>
+
+        <div class="field mb-14">
+          <label for="wAmount">Jumlah Penarikan <span class="req">*</span></label>
+          <div class="input-group">
+            <span class="prefix">Rp</span>
+            <input type="number" class="input with-prefix" id="wAmount" placeholder="50000" min="50000" step="1000" />
+          </div>
+          <div class="err-msg" id="eAmount">Minimal Rp 50.000 dan tidak melebihi saldo.</div>
+        </div>
+
+        <div class="field mb-14">
+          <label for="wMethod">Metode Penarikan <span class="req">*</span></label>
+          <select class="select" id="wMethod">
+            <option value="">Pilih metode</option>
+            <option value="bank-bca">Transfer Bank BCA</option>
+            <option value="bank-bni">Transfer Bank BNI</option>
+            <option value="bank-bri">Transfer Bank BRI</option>
+            <option value="bank-mandiri">Transfer Bank Mandiri</option>
+            <option value="ewallet-dana">E-Wallet DANA</option>
+            <option value="ewallet-ovo">E-Wallet OVO</option>
+            <option value="ewallet-gopay">E-Wallet GoPay</option>
+            <option value="ewallet-shopee">E-Wallet ShopeePay</option>
+          </select>
+          <div class="err-msg" id="eMethod">Pilih metode penarikan.</div>
+        </div>
+
+        <div class="field mb-14">
+          <label for="wAccount">Nomor Rekening / Tujuan <span class="req">*</span></label>
+          <input type="text" class="input" id="wAccount" placeholder="Contoh: 1234567890" autocomplete="off" />
+          <div class="err-msg" id="eAccount">Nomor wajib diisi, minimal 6 digit.</div>
+        </div>
+
+        <div class="field mb-14">
+          <label for="wName">Nama Pemilik Rekening <span class="req">*</span></label>
+          <input type="text" class="input" id="wName" placeholder="Nama sesuai rekening" autocomplete="off" />
+          <div class="err-msg" id="eName">Nama pemilik rekening wajib diisi.</div>
+        </div>
+
+        <div class="note warn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 9v4M12 17h.01"/>
+            <path d="M10.3 3.6 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0Z"/>
+          </svg>
+          <span>Pastikan data rekening benar. Kesalahan data yang menyebabkan transfer gagal bukan tanggung jawab pengelola.</span>
+        </div>
+
+      </form>
+    </div>
+    <div class="sheet-foot">
+      <button class="btn btn-outline" data-close>Batal</button>
+      <button class="btn btn-primary" id="btnDoWithdraw">Ajukan Penarikan</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     BOTTOM NAV — TOOLBAR
+     ============================================================ -->
+<nav class="nav">
+  <div class="nav-inner">
+
+    <!-- HOME -->
+    <a href="index.html" class="nav-btn" data-page="home">
+      <span class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 10.5 12 3l9 7.5"/>
+          <path d="M5 9.5V21h14V9.5"/>
+          <path d="M9 21v-6h6v6"/>
+        </svg>
+      </span>
+      <span class="lbl">Home</span>
+    </a>
+
+    <!-- TASK -->
+    <a href="task.html" class="nav-btn" data-page="task">
+      <span class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 11l3 3L22 4"/>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+        </svg>
+      </span>
+      <span class="lbl">Task</span>
+      <span class="dot" id="taskDot">0</span>
+    </a>
+
+    <!-- RIWAYAT -->
+    <a href="riwayat.html" class="nav-btn" data-page="riwayat">
+      <span class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 1 0 3-6.7"/>
+          <polyline points="3 4 3 9 8 9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+      </span>
+      <span class="lbl">Riwayat</span>
+      <span class="dot" id="histDot">0</span>
+    </a>
+
+    <!-- WITHDRAW (ACTIVE) -->
+    <a href="wd.html" class="nav-btn active" data-page="wd">
+      <span class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="6" width="20" height="13" rx="2.5"/>
+          <path d="M2 10h20"/>
+          <path d="M6 15h4"/>
+        </svg>
+      </span>
+      <span class="lbl">Withdraw</span>
+    </a>
+
+    <!-- AKUN (COMING SOON) -->
+    <a href="akun.html" class="nav-btn soon" data-page="akun">
+      <span class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </span>
+      <span class="lbl">Akun</span>
+    </a>
+
+  </div>
+</nav>
+
+<!-- ============================================================
+     TOAST + SCRIPT
+     ============================================================ -->
+<div class="toast-wrap" id="toastWrap"></div>
+<script src="app.js"></script>
+
+</body>
+</html>
