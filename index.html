@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#202024" />
+<meta name="description" content="Reward Center — platform reward promosi TikTok." />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>Reward Center — Beranda</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="home">
+
+<!-- ============================================================
+     VIDEO WALLPAPER
+     ============================================================ -->
+<video
+  class="bg-video"
+  id="bgVideo"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto"
+  disablepictureinpicture
+  poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><rect width='100%25' height='100%25' fill='%23121215'/></svg>"
+>
+  <source src="wp.mp4" type="video/mp4" />
+</video>
+
+<!-- Overlay gelap biar konten kebaca -->
+<div class="bg-overlay" aria-hidden="true"></div>
+<!-- Grain/noise subtle -->
+<div class="bg-noise" aria-hidden="true"></div>
+
+<!-- ============================================================
+     TOP BAR
+     ============================================================ -->
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <div class="brand-mark">RC</div>
+      <div class="brand-txt">
+        <span class="brand-name">Reward Center</span>
+        <span class="brand-sub">Promosi TikTok</span>
+      </div>
+    </div>
+    <div class="balance-pill">
+      <span class="lbl">Saldo</span>
+      <span class="val" id="topBalance">Rp 0</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main class="app">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">
+        <span class="pulse"></span>
+        <span>Program aktif · kuota terbatas</span>
+      </div>
+      <h1>
+        Dapatkan reward dengan <span class="accent">promosi lewat video TikTok</span>.
+      </h1>
+      <p>
+        Ambil tugas, buat video promosi, unggah ke TikTok, kirim buktinya.
+        Tim verifikasi akan meninjau dan mencairkan reward ke saldo kamu.
+      </p>
+      <div class="hero-actions">
+        <a href="task.html" class="btn btn-primary btn-sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+          Lihat Tugas
+        </a>
+        <a href="riwayat.html" class="btn btn-outline btn-sm">
+          Riwayat
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats mt-16">
+    <div class="stat">
+      <div class="k">Tugas Aktif</div>
+      <div class="v" id="mTasks">0</div>
+      <div class="s">diperbarui hari ini</div>
+    </div>
+    <div class="stat">
+      <div class="k">Total Reward</div>
+      <div class="v" id="mReward">Rp 0</div>
+      <div class="s">seluruh periode</div>
+    </div>
+    <div class="stat">
+      <div class="k">Terverifikasi</div>
+      <div class="v" id="mVerified">0</div>
+      <div class="s">video diterima</div>
+    </div>
+    <div class="stat">
+      <div class="k">Rata-rata</div>
+      <div class="v" id="mAvg">Rp 0</div>
+      <div class="s">per video</div>
+    </div>
+  </div>
+
+  <!-- TUGAS POPULER -->
+  <div class="mt-24">
+    <div class="sec-head">
+      <div class="left">
+        <div class="eyebrow">Pekerjaan</div>
+        <h2>Tugas Populer</h2>
+      </div>
+      <a href="task.html" class="btn btn-ghost btn-xs">
+        Semua
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
+      </a>
+    </div>
+    <div class="task-list" id="homeTaskList"></div>
+  </div>
+
+  <!-- CARA KERJA -->
+  <div class="mt-24">
+    <div class="sec-head">
+      <div class="left">
+        <div class="eyebrow">Alur</div>
+        <h2>Cara Kerja</h2>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h4>Pilih Tugas</h4>
+          <p>Buka daftar tugas, baca ketentuan, dan pastikan kamu sanggup menyelesaikannya.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h4>Ambil &amp; Buat Video</h4>
+          <p>Ambil tugas, lalu rekam video promosi sesuai durasi dan ketentuan yang diminta.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h4>Kirim Bukti</h4>
+          <p>Salin tautan video TikTok, tempel pada form pengajuan, lalu kirim untuk diverifikasi.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <h4>Reward Masuk</h4>
+          <p>Jika diterima, reward otomatis masuk ke saldo dompet. Tarik setelah mencapai minimum.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="brand">
+      <div class="brand-mark">RC</div>
+      <div class="brand-txt">
+        <span class="brand-name">Reward Center</span>
+        <span class="brand-sub">Promosi TikTok</span>
+      </div>
+    </div>
+    <p>Platform reward untuk kreator yang mempromosikan website melalui video TikTok.</p>
+    <div class="foot-links">
+      <a href="task.html">Tugas</a>
+      <a href="riwayat.html">Riwayat</a>
+      <a href="wd.html">Dompet</a>
+    </div>
+    <div class="foot-copy">© <span id="year"></span> Reward Center · Status: operasional</div>
+  </footer>
+
+</main>
+
+<!-- ============================================================
+     SHEET: DETAIL TUGAS
+     ============================================================ -->
+<div class="overlay" id="sheetDetail">
+  <div class="sheet">
+    <div class="sheet-handle"><span></span></div>
+    <div class="sheet-head">
+      <div style="min-width:0">
+        <h3 id="dTitle">Detail Tugas</h3>
+        <div class="sub" id="dId">—</div>
+      </div>
+      <button class="sheet-close" data-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="sheet-body" id="dBody"></div>
+    <div class="sheet-foot" id="dFoot"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SHEET: SUBMIT BUKTI
+     ============================================================ -->
+<div class="overlay" id="sheetSubmit">
+  <div class="sheet">
+    <div class="sheet-handle"><span></span></div>
+    <div class="sheet-head">
+      <div style="min-width:0">
+        <h3>Kirim Bukti Video</h3>
+        <div class="sub" id="sTaskTitle">—</div>
+      </div>
+      <button class="sheet-close" data-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="sheet-body">
+      <form id="formSubmit" novalidate>
+        <input type="hidden" id="sTaskId" />
+
+        <div class="field mb-14">
+          <label for="sUsername">Username TikTok <span class="req">*</span></label>
+          <div class="input-group">
+            <span class="prefix">@</span>
+            <input type="text" class="input with-prefix" id="sUsername" placeholder="usernamekamu" autocomplete="off" />
+          </div>
+          <div class="err-msg" id="eUsername">Username wajib diisi, tanpa spasi.</div>
+        </div>
+
+        <div class="field mb-14">
+          <label for="sLink">Tautan Video TikTok <span class="req">*</span></label>
+          <input type="url" class="input" id="sLink" placeholder="https://www.tiktok.com/@user/video/..." autocomplete="off" />
+          <div class="hint">Tempel tautan lengkap video, bukan tautan profil.</div>
+          <div class="err-msg" id="eLink">Tautan harus berupa URL TikTok yang valid.</div>
+        </div>
+
+        <div class="field mb-14">
+          <label for="sViews">Jumlah Views Saat Ini <span class="req">*</span></label>
+          <input type="number" class="input" id="sViews" placeholder="Contoh: 1500" min="0" />
+          <div class="hint">Masukkan jumlah penayangan video saat pengajuan dikirim.</div>
+          <div class="err-msg" id="eViews">Jumlah views wajib diisi dengan angka.</div>
+        </div>
+
+        <div class="field mb-14">
+          <label for="sNote">Catatan Tambahan</label>
+          <textarea class="textarea" id="sNote" placeholder="Opsional — jam unggah, tag, atau kendala."></textarea>
+        </div>
+
+        <label class="check mb-8">
+          <input type="checkbox" id="sAgree" />
+          <span>Saya menyatakan video ini dibuat sendiri, sesuai ketentuan tugas, dan tidak melanggar aturan program.</span>
+        </label>
+        <div class="err-msg mb-14" id="eAgree">Kamu harus menyetujui pernyataan sebelum mengirim.</div>
+
+        <div class="note info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/><path d="M12 16v-5M12 8h.01"/>
+          </svg>
+          <span>Pastikan tautan video dapat dibuka tanpa login. Tautan tidak valid akan langsung ditolak.</span>
+        </div>
+      </form>
+    </div>
+    <div class="sheet-foot">
+      <button class="btn btn-outline" data-close>Batal</button>
+      <button class="btn btn-primary" id="btnSubmitProof">Kirim Pengajuan</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ============================================================
+     SCRIPT: VIDEO WALLPAPER CONTROLLER
+     ============================================================ -->
+<script>
+(function(){
+  'use strict';
+
+  var video = document.getElementById('bgVideo');
+  if (!video) return;
+
+  /* --------------------------------------------------------
+     01. Autoplay guard — beberapa browser mobile
+         (iOS low-power, Chrome data saver) blokir autoplay
+         walau muted. Kita coba play() manual dan retry
+         pada interaksi pertama user.
+     -------------------------------------------------------- */
+  function tryPlay() {
+    var p = video.play();
+    if (p && typeof p.catch === 'function') {
+      p.catch(function(){
+        // Autoplay diblokir, tunggu interaksi user
+        var resume = function() {
+          video.play().catch(function(){});
+          document.removeEventListener('touchstart', resume);
+          document.removeEventListener('click', resume);
+          document.removeEventListener('scroll', resume);
+        };
+        document.addEventListener('touchstart', resume, { once: true, passive: true });
+        document.addEventListener('click', resume, { once: true });
+        document.addEventListener('scroll', resume, { once: true, passive: true });
+      });
+    }
+  }
+
+  /* --------------------------------------------------------
+     02. Pause saat tab tidak aktif biar hemat baterai
+     -------------------------------------------------------- */
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) {
+      video.pause();
+    } else {
+      tryPlay();
+    }
+  });
+
+  /* --------------------------------------------------------
+     03. Fallback: kalau video error / tidak ketemu,
+         pakai gradient gelap (CSS sudah handle via --bg-0)
+     -------------------------------------------------------- */
+  video.addEventListener('error', function(){
+    video.style.display = 'none';
+    document.body.style.background =
+      'linear-gradient(160deg,#1A1A1F 0%,#0E0E11 100%)';
+  });
+
+  /* --------------------------------------------------------
+     04. Play pertama kali & saat terlihat di viewport
+     -------------------------------------------------------- */
+  tryPlay();
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          tryPlay();
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0 });
+    io.observe(video);
+  }
+
+  /* --------------------------------------------------------
+     05. Muat ulang video saat halaman balik dari bfcache
+     -------------------------------------------------------- */
+  window.addEventListener('pageshow', function(evt){
+    if (evt.persisted) {
+      video.currentTime = 0;
+      tryPlay();
+    }
+  });
+})();
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>
